@@ -1,0 +1,9 @@
+/.idea
+/.vscode
+node_modules/
+app/
+thinkphp/
+/vendor
+*.log
+thinkphp
+.env

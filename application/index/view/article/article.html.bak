@@ -1,0 +1,152 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+{include file='base/head'}
+<style>
+    body {
+        background: #fff;
+    }
+</style>
+
+<body>
+    {include file="base/header"}
+    <!--顶部通栏-->
+    <script src='/jiehun/goto/my-65547.js' language='javascript'></script>
+
+    <div class="position">
+        <a href='/'>主页</a> >
+        <a href="{:url('cate/index',array('cateid'=>$cates['id']))}">{$cates.catename}</a> > </div>
+
+    <div class="overall">
+        <div class="left">
+            <div class="scrap">
+                <h1>{$articles.title}</h1>
+                <div class="spread">
+                    <span class="writor">发布时间：{$articles.time|date='Y-m-d H:i'}</span>
+                    <span class="writor">编辑：{$articles.author}</span>
+                    <span class="writor">标签：
+                        <?php
+                            $arr=explode(',',$articles['keywords']);
+                            foreach($arr as $k=>$v) {
+                               echo "<a href='z95926.html'>$v</a>";
+                           }
+                          ?>
+                    </span>
+                    <span class="writor">点击量：{$articles.click}</span>
+                </div>
+            </div>
+
+            <!--百度分享-->
+            <script src='/jiehun/goto/my-65542.js' language='javascript'></script>
+
+            <div class="takeaway">
+                <span class="btn arr-left"></span>
+                <p class="jjxq">{$articles.desc_content}</p>
+                </p>
+                <span class="btn arr-right"></span>
+            </div>
+
+            <script src='/jiehun/goto/my-65541.js' language='javascript'></script>
+
+            <div class="substance">
+                {$articles.content|raw}
+            </div>
+
+
+            <div class="biaoqian">
+
+            </div>
+
+            <div id="html-container0" style="height:300px;width:300px;border:1px solid black;"></div>
+            <div id="html-container" style="height:300px;width:300px;border:1px solid black;"></div>
+
+            <!--相关阅读 -->
+            <div class="xgread">
+                <div class="til">
+                    <h4>相关阅读</h4>
+                </div>
+                <div class="lef">
+                    <!--相关阅读主题链接-->
+                    <script src='/jiehun/goto/my-65540.js' language='javascript'></script>
+                </div>
+                <div class="rig">
+                    <ul>
+                        {volist name="relatres" id="vo"}
+                        <li>
+                            <a href="{:url('article/index',array('arid'=>$vo[0]))}" target="_blank">{$vo.1}</a>
+                        </li>
+                        {/volist}
+                    </ul>
+                </div>
+            </div>
+
+            <!--频道推荐-->
+            <div class="hotsnew">
+                <div class="til">
+                    <h4>频道推荐</h4>
+                </div>
+                <ul>
+                    {volist name="recres" id="vo"}
+                    <li>
+                        <div class="tu">
+                            <a href="{:url('article/index',array('arid'=>$vo.id))}" target="_blank">
+                                <img src="{if condition=" $vo[ 'pic'] neq '' "} {$vo.pic} {else /}__IMAGES__/common.jpg {/if}" />
+                            </a>
+                        </div>
+                        <p>
+                            <a href="{:url('article/index',array('arid'=>$vo.id))}">{$vo.title}</a>
+                        </p>
+                    </li>
+                    {/volist}
+                </ul>
+            </div>
+        </div>
+
+        {include file="base/right"}
+    </div>
+
+    {include file="base/footer"}
+
+    <div style="display:none;">
+        <script src='/jiehun/goto/my-65537.js' language='javascript'></script>
+        <script src="/jiehun/images/js/count_zixun.js" language="JavaScript"></script>
+    </div>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+    <script>
+
+        function getRequest(url) {
+            var theRequest = new Object();
+            if (url.indexOf("?") != -1) {
+                var strs = url.split("?")
+                strs = strs[1].split("&");
+                for (var i = 0; i < strs.length; i++) {
+                    theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
+                }
+            }
+            return theRequest;
+        }
+
+        var url = window.location.href
+
+        var code = getRequest(url).code
+        
+        $('#html-container0').html(code)
+
+       $.ajax({
+            url: '/api/wxtoken',
+            data: {
+                code: code,
+            },
+            success:function(res){
+                $('#html-container').html(res)
+            },
+            error:function(){
+                $('#html-container').html('err')
+            }
+        })     
+
+
+
+    </script>
+</body>
+
+</html>

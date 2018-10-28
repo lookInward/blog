@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+{include file="base/head"}
+<!--Head Ends-->
+<!--Body-->
+
+<body>
+    <div class="login-container animated fadeInDown">
+        <form action="" method="post">
+            <div class="loginbox bg-white">
+                <div class="loginbox-title">SIGN IN</div>
+                <div class="loginbox-textbox">
+                    <input value="admin" class="form-control" placeholder="username" name="username" type="text">
+                </div>
+                <div class="loginbox-textbox">
+                    <input class="form-control" placeholder="password" name="password" type="password">
+                </div>
+               
+                <div class="loginbox-textbox">
+                    <img src="{:captcha_src()}" style="width: 66%;height: 34px;cursor:pointer;" alt="captcha" onclick="this.src='{:captcha_src()}+Math.random()'" />
+                    <input class="form-control" style="width: 34%;float: right;" placeholder="code" name="code" type="text">
+                </div>
+                <div class="loginbox-submit">
+                    <input class="btn btn-primary btn-block" value="Login" type="submit">
+                </div>
+            </div>
+        </form>
+    </div>
+    <!--Basic Scripts-->
+    <script src="__ADMIN_STYLE__/jquery.js"></script>
+    <script src="__ADMIN_STYLE__/bootstrap.js"></script>
+    <script src="__ADMIN_STYLE__/jquery_002.js"></script>
+    <!--Beyond Scripts-->
+    <script src="__ADMIN_STYLE__/beyond.js"></script>
+
+
+
+
+</body><!--Body Ends--></html>

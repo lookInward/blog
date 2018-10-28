@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+{include file="base/head"}
+
+<body>
+	{include file="base/header"}
+	<!--顶部通栏-->
+
+
+	<div class="position">搜索：{$keywords} </div>
+
+	<div class="overall">
+
+		<div class="left">
+
+            {volist name="searchres" id="vo"}
+			<div class="xnews2" onClick="javascript:window.location.href = '{:url('article/index',array('arid'=>$vo['id']))}'">
+				<div class="pic">
+					<a target="_blank" href="{:url('article/index',array('arid'=>$vo['id']))}">
+						<img src="{if condition="$vo['pic'] neq '' "} {$vo.pic} {else /}__IMAGES__/common.jpg {/if}" alt="" />
+					</a>
+				</div>
+				<div class="dec">
+					<h3>
+						<a target="_blank" href="{:url('article/index',array('arid'=>$vo['id']))}">{$vo.title}</a>
+					</h3>
+					<div class="time">发布时间：{$vo['time']|date='Y-m-d H:i'}</div>
+					<p>{$vo.desc_content}</p>
+					<div class="time">
+					    <?php
+						  $arr=explode(',',$vo['keywords']);
+						  foreach($arr as $k=>$v) {
+							 echo "<a>$v</a>";
+						 }
+						?>
+				    </div>
+				</div>
+            </div>
+			{/volist}
+
+			<div class="pages">
+				<div class="plist">
+                        {$searchres|raw}
+				</div>
+			</div>
+		</div>
+
+		{include file="base/right"}
+
+	</div>
+	{include file="base/footer"}
+
+	<div style="display:none;">
+		<script src='goto/my-65537.js' language='javascript'></script>
+		<script src="images/js/count_zixun.js" language="JavaScript"></script>
+	</div>
+
+</body>
+
+</html>

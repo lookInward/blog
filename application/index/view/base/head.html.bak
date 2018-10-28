@@ -1,0 +1,115 @@
+<head>
+    <title>lookInward</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="lookInward博客,lookInward,刘洪瑞" />
+    <meta name="description" content="lookInward博客,lookInward,刘洪瑞" />
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+
+    <link href="__STYLE__/bootstrap.css" type="text/css" rel="stylesheet" />
+    <link href="__STYLE__/lady.css" type="text/css" rel="stylesheet" />
+    <script type='text/javascript' src='images/js/ismobile.js'></script>
+    <style>
+        body {
+            background: #efefef;
+        }
+        .position{
+            color:#666;
+            font-size:18px;
+            margin-top:44px;
+       }
+          .position>a{
+          color:#666;
+       }
+        .footerd {
+            background: #222;
+        }
+        .overall .left {
+            padding-top: 8px;
+            overflow: unset;
+        }
+
+        .pagination {
+            margin: 0;
+        }
+
+        .ladytop .nav .right {
+    float: right;
+}
+
+        .ladytop {
+            height: unset;
+        }
+
+        a {
+            text-decoration: none !important;
+        }
+
+        .xnews2 {
+            width: 750px;
+            background: #fff;
+            clear: both;
+            overflow: hidden;
+            border-radius: 4px;
+            padding: 0;
+            margin-bottom: 30px;
+            cursor: pointer;
+        }
+
+        .xnews2:hover {
+            box-shadow: 0px 0px 12px 3px #ddd;
+        }
+
+        .ladytop .nav .right .box a {
+            color: #6a6a6a;
+        }
+
+        .ladytop .nav .right .box a {
+            padding: 0 30px;
+            margin: 0;
+        }
+
+        .overall {
+            padding-top: 2px;
+        }
+
+        .ladytop {
+            padding: 0;
+            background: #fff;
+            box-shadow: 0 0 5px 2px #ddd;
+            position: fixed;
+            top:0;
+            z-index: 9;
+        }
+
+        .ladytop .nav {
+            height: 50px;
+        }
+        .overall .right {
+          margin-top: 8px;
+          }
+
+        .xnews2 .time a {
+            height: 22px;
+            line-height: 18px;
+            border-radius: 14px;
+        }
+
+        .ladytop .nav .right .box a {
+            padding: 0 30px;
+            display: inline-block;
+            height: 50px;
+            line-height: 48px;
+            margin: 0;
+        }
+        .ladytop .nav .right .box a:nth-child(1){
+            background: blue !important;
+            color: #fff;
+        }
+
+        .ladytop .nav .right .box a:hover {
+            background: #08bf91;
+            color: #fff;
+            cursor: pointer;
+        }
+    </style>
+</head>

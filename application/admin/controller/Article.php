@@ -1,0 +1,131 @@
+<?php
+namespace app\admin\controller;
+use think\Db;
+
+use app\admin\controller\Base;
+use app\admin\model\Article as ArticleModel;
+use app\admin\model\Cate as CateModel;
+
+class Article extends Base
+{
+    public function lst()   
+    {
+        $list = ArticleModel::paginate(15);
+        // $list = ArticleModel::table('article')
+        // ->alias('a')
+        // ->join('cate c','c.id=a.cateid')
+        // ->field('a.id,a.title,a.pic,a.author,a.state,c.catename')
+        // ->paginate(3);
+
+
+        $this->assign('list',$list);
+        return $this->fetch();
+    }
+
+    public function edit(){
+        $id=input('id');
+        if(request()->isPost()){
+            $data=[
+                'title'=>input('title'),
+                'author'=>input('author'),
+                'desc_content'=>input('desc_content'),
+                'keywords'=>str_replace('，',',',input('keywords')),
+                'content'=>input('content'),
+                'cateid'=>input('cateid'),
+                'time'=>time(),
+            ];
+
+            if(input('state')=='true') {
+                $data['state']=1;
+            }else{
+                $data['state']=0;
+            }
+            
+            if($_FILES['pic']['tmp_name']){
+                @unlink('../public/static/uploads/'.$articles['pic']);
+                $file=request()->file('pic');
+                $info=$file->move('../public/static/uploads');
+                $data['pic']='/lookinward/public/static/uploads/'.$info->getSaveName();
+            }
+
+            $validate = new \app\admin\validate\Article;
+            $res=$validate->scene('edit')->check($data);
+ 
+            if(!$res){
+                $this->error($validate->getError());
+                die;
+            }
+
+            $res = ArticleModel::where('id',$id)->update($data);
+            if($res){
+                $this->success('修改成功','lst');
+            }else{
+                $this->error('修改失败','lst');
+            }
+            return;
+        }
+        $articles = ArticleModel::get($id);
+        $this->assign('articles',$articles);
+        $cates = CateModel::select();
+        $this->assign('cates',$cates);
+        return $this->fetch();
+    }
+
+    public function add()
+    {
+        if(request()->isPost()) {
+            $data=[
+                'title'=>input('title'),
+                'author'=>input('author'),
+                'desc_content'=>input('desc_content'),
+                'keywords'=>str_replace('，',',',input('keywords')),
+                'content'=>input('content'),
+                'cateid'=>input('cateid'),
+                'time'=>time(),
+            ];
+            
+            if(input('state')=='true') {
+                $data['state']=1;
+            }else{
+                $data['state']=0;
+            }
+            
+            if($_FILES['pic']['tmp_name']){
+                $file=request()->file('pic');
+                $info=$file->move('../public/static/uploads');
+                $data['pic']='/lookinward/public/static/uploads/'.$info->getSaveName();
+            }
+
+            $validate = new \app\admin\validate\Article;
+            if(!$validate->check($data)) {
+                $this->error($validate->getError());
+                die;
+            }
+            if(Db::name('article')->insert($data)){
+                return $this->success('添加成功','lst');
+            }else {
+                return $this->error('添加失败','lst');
+            }
+           retrun ; 
+        }
+        $cates = CateModel::select();
+        $this->assign('cates',$cates);
+        return $this->fetch();
+    }
+
+
+    public function del(){
+        $id=input('id');
+        if($id==1){
+            $this->error('禁止删除','lst');
+            return;
+        }
+        $articles = ArticleModel::get($id);
+        $res = $articles->delete();
+        if($res){
+            $this->success('删除成功','lst');
+        }else{
+            $this->error('删除失败','lst');
+        };
+    }
+}
