@@ -40,7 +40,7 @@ class Wx extends Base
         $openid = $res->openid;
         $user = json_decode(CurlGet("https://api.weixin.qq.com/sns/userinfo?access_token=".$access_token."&openid=".$openid."&lang=zh_CN"));
         
-        dump($user);
+        $user = json_encode($user);
+        return $user;
     }
 }
-
