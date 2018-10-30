@@ -14,6 +14,8 @@ Route::get('/think', function () {
 });
 
 Route::get('/labex-ui', 'Labexui/index');
+Route::get('/test2', 'Test2/index');
+Route::get('/weixin_authorize', 'Wx/wxtoken');
 
 return [
 
